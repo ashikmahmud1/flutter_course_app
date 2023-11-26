@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_app/screens/sidebar_screen.dart';
 
 import '../components/home_screen_navbar.dart';
+import '../components/lists/explore_course_list.dart';
 import '../components/lists/recent_course_list.dart';
 import '../constants.dart';
 
@@ -35,10 +36,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         curve: Curves.easeInOut,
       ),
     );
-    fadeAnimation = Tween<double>(
-        begin: 0,
-        end: 1
-    ).animate(
+    fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: sidebarAnimationController,
         curve: Curves.easeInOut,
@@ -62,12 +60,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             SafeArea(
               child: Column(
                 children: [
-                  HomeScreenNavBar(triggerAnimation: () {
-                    sidebarAnimationController.forward();
-                    setState(() {
-                      sidebarHidden = !sidebarHidden;
-                    });
-                  },),
+                  HomeScreenNavBar(
+                    triggerAnimation: () {
+                      sidebarAnimationController.forward();
+                      setState(() {
+                        sidebarHidden = !sidebarHidden;
+                      });
+                    },
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
@@ -91,6 +91,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     height: 20,
                   ),
                   const RecentCourseList(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 25,
+                      bottom: 16,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Explore",
+                          style: kTitle1Style,
+                        )
+                      ],
+                    ),
+                  ),
+                  const ExploreCourseList(),
                 ],
               ),
             ),
@@ -109,14 +127,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       },
                       child: Container(
                         color: const Color.fromRGBO(36, 38, 41, .4),
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
                       ),
                     ),
                   ),
