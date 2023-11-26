@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class SidebarButton extends StatelessWidget {
-  const SidebarButton({
-    super.key,
-  });
+  const SidebarButton({super.key, required this.triggerAnimation});
+
+  final Function triggerAnimation;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class SidebarButton extends StatelessWidget {
         maxWidth: 40,
       ),
       onPressed: () {
-        print('sidebar button pressed');
+        triggerAnimation();
       },
       child: Container(
         decoration: BoxDecoration(
